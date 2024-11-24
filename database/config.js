@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
+
+
 mongoose.set('strictQuery', true);
-
-
+  
 const dbConnect = async () => {
     try {
         //connect to database
@@ -10,8 +11,8 @@ const dbConnect = async () => {
         console.log('connect to  database');
 
     }catch  (error) {
-        console.error('Error connection to MongoDB', error,message)
+        console.error('Error connection to MongoDB', error.message)
     }
 }
 
-module.exports = dbConnect()//exporta la función
+module.exports = dbConnect;

@@ -1,30 +1,32 @@
-const {model, Schema} = require('mongoose')
+const { model, Schema } = require('mongoose');
 
 const servicesSchema = new Schema(
     {
+        ID_Service: {
+            type: Number,
+            required: [true, 'The ID Service is required'],
+            unique: true
+
+        },
+
         Name: {
             type: String,
-            unique: true,
-            required:[true, 'The Name is required'],
-            maxlength:[6, 'Maximun 20 characters'],
-            minlength:[5, 'Minimun 5 characters']
+            required: [true, 'The Name is required'],
+            maxlength: [30, 'Maximum 30 characters']
         },
 
-        Price:{
-            type:Number,
-            required:[true, 'The price is required'],
-            minlength:[3, 'Minimun 6 characters']
+        Price: {
+            type: Number,
+            required: [true, 'The price is required']
         },
 
-        Category:{
+        Category: {
             type: String,
-            unique: true,
-            required:[true, 'The Category is required'],
-            maxlength:[6, 'Maximun 20 characters'],
-            minlength:[5, 'Minimun 5 characters']
-        },
-
+            required: [true, 'The Category is required'],
+            maxlength: [20, 'Maximum 20 characters']
+        }
     }
-)
+);
 
-module.exports = model('Services', servicesSchema, 'Services')
+module.exports = model('Services', servicesSchema, 'Services');
+
