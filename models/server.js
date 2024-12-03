@@ -1,8 +1,9 @@
 const express = require('express');
+const cors = require('cors'); // Importa el paquete CORS
 
 const dbConnect = require('../database/config');
 dbConnect();
-const customerRoutes = require('../routes/customerRoute')
+const customerRoutes = require('../routes/customerRoute');
 const { postServices, getServices, putServices, deleteServices, getServiceById } = require('../controllers/ServicesController');
 const { postCustomer, getCustomers, putCustomer, deleteCustomer } = require('../controllers/customersController');
 
@@ -25,6 +26,10 @@ class Server {
     route() {
         this.app.use(express.json());
 
+        // Habilita CORS globalmente
+        this.app.use(cors()); // Esto permite solicitudes desde cualquier origen
+
+
         // Rutas para los servicios
         this.app.get(this.pathServices, getServices);
         this.app.get(this.pathServices + '/:id', getServiceById);
@@ -37,7 +42,6 @@ class Server {
         this.app.post(this.pathCustomers, postCustomer);
         this.app.put(this.pathCustomers + '/:id', putCustomer);  
         this.app.delete(this.pathCustomers + '/:id', deleteCustomer);
-
     }
 
     listen() {
@@ -46,6 +50,5 @@ class Server {
         });
     }
 }
-
 
 module.exports = Server;
